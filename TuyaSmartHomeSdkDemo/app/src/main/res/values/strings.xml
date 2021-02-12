@@ -744,4 +744,7 @@
     <string name="login_qrlogin_pad_info">Need to log in with your phone</string>
     <string name="login_qrcode" >QR Code Login</string>
 
+    <!-- AGREGADOS -->
+    <string name="texto_panel_devices" translatable="false">ir a status page</string>
+
 </resources>

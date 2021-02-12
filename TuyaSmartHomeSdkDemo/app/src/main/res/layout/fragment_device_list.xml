@@ -29,15 +29,17 @@
         android:layout_marginBottom="@dimen/mg_60"
         android:layout_below="@id/network_tip"
     >
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#B6DADF">
             <!-- 因为SwipeRefreshLayout 会强行把它的子view拉成满屏的高度 这里使用item的背景色实现列表背景色 listview直接设置透明-->
             <ListView
                 android:id="@+id/lv_device_list"
                 style="@style/list_view"
-                android:background="@color/transparent"/>
+                android:background="@color/transparent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
@@ -47,13 +49,12 @@
         android:id="@+id/tv_shortcut"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mg_60"
-        android:background="@color/gray"
-        android:textColor="@color/black"
-        android:textSize="@dimen/mg_20"
-        android:gravity="center"
-        android:text="@string/goto_shortcut_parser_demo"
         android:layout_alignParentBottom="true"
-        />
+        android:background="@color/gray"
+        android:gravity="center"
+        android:text="@string/texto_panel_devices"
+        android:textColor="@color/black"
+        android:textSize="@dimen/mg_20" />
 
     <RelativeLayout
         android:id="@+id/list_background_tip"
