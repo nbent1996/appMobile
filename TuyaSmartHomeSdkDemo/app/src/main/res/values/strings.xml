@@ -26,7 +26,7 @@
     <string name="binding">Binding&#046;&#046;</string>
     <string name="cancel_tip">OK</string>
     <string name="click_bind_phone">Tap bind phone number</string>
-    <string name="click_set_neekname">Tap to set your name</string>
+    <string name="click_set_neekname">Toque para establecer su nombre</string>
     <string name="contact_use_tip">You sign in with %s account</string>
     <string name="env_preview">(Preview)</string>
     <string name="env_wrong_tip">The device is online, while App is running under preview
@@ -313,10 +313,10 @@
     <string name="go_next">Next</string>
     <string name="has_update"><![CDATA[<font color="#ff0000">New Version %s</font>]]></string>
     <string name="head_icon">Picture</string>
-    <string name="home_add_device">Add Device</string>
-    <string name="home_my_device">Devices</string>
+    <string name="home_add_device">Añadir dispositivo</string>
+    <string name="home_my_device">Dispositivos</string>
     <string name="home_scene">Smart</string>
-    <string name="home_personal_center">Profile</string>
+    <string name="home_personal_center">Perfil</string>
     <string name="input_new_user_phone_number">Enter new member\'s phone number</string>
     <string name="input_password">Password</string>
     <string name="input_telephone_number">Phone Number</string>
@@ -745,6 +745,6 @@
     <string name="login_qrcode" >QR Code Login</string>
 
     <!-- AGREGADOS -->
-    <string name="texto_panel_devices" translatable="false">ir a status page</string>
+    <string name="texto_panel_devices" translatable="false">Ver estado</string>
 
 </resources>
