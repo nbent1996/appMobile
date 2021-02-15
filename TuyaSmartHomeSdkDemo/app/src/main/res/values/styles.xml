@@ -10,7 +10,8 @@
         <item name="colorAccent">@color/color_accent</item>
 
         <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:windowBackground">@drawable/ty_pre</item>
+        <!--<item name="android:windowBackground">@drawable/ty_pre</item>-->
+        <item name="android:windowBackground">@drawable/alfacom_logo</item>
 
 
         <item name="android:windowContentOverlay">@android:color/transparent</item>
