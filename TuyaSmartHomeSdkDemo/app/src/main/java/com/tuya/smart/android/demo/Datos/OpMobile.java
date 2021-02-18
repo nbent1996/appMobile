@@ -47,7 +47,10 @@ public class OpMobile implements IOperaciones<Object,Integer> {
     public LogSistema borradoMultiplePorIds(ArrayList<Integer> listaIds) throws Exception, SQLException {
         return null;
     }
+    public boolean esServicioActivo(String emailUser){
 
+        return false;
+    }
     @Override
     public LogSistema registroConsola(String usuarioSistema, ArrayList<String> listaSQL, String operacion, String textoError) throws Exception, SQLException {
         LogSistema log = new LogSistema(usuarioSistema, operacion, textoError, new ArrayList<>());
