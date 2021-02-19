@@ -14,8 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.tuya.smart.android.common.utils.ValidatorUtil;
+import com.tuya.smart.android.demo.Datos.OpPersona;
+import com.tuya.smart.android.demo.Modelo.Empresa;
+import com.tuya.smart.android.demo.Modelo.Operador;
+import com.tuya.smart.android.demo.Modelo.Pais;
+import com.tuya.smart.android.demo.Modelo.TipoUsuario;
 import com.tuya.smart.android.demo.R;
 import com.tuya.smart.android.demo.base.activity.BaseActivity;
 import com.tuya.smart.android.demo.login.presenter.LoginPresenter;
@@ -166,6 +173,18 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     @OnClick(R.id.login_submit)
     public void onClickLogin() {
         // 登录
+        /*nbent*/
+        OpPersona op = new OpPersona(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
+        try {
+            if(op.buscar(" WHERE Clientes.email='"+mUserName.getText()+"' AND Principales.servicioActivo='N'","Modelo.Principal").size()>0){
+                Toast.makeText(LoginActivity.this,"Error de ingreso, póngase en contacto con su asesor.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*nbent*/
         if (mLoginSubmit.isEnabled()) {
             String userName = mUserName.getText().toString();
             if (!ValidatorUtil.isEmail(userName) && mCountryName.getText().toString().contains("+86") && mUserName.getText().length() != 11) {
@@ -221,6 +240,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         mLoginPresenter.onActivityResult(requestCode, resultCode, data);
     }
 

@@ -9,6 +9,11 @@ import android.content.Intent;
 import androidx.multidex.MultiDexApplication;
 
 import com.tuya.smart.android.common.utils.L;
+import com.tuya.smart.android.demo.Datos.OpPersona;
+import com.tuya.smart.android.demo.Modelo.Empresa;
+import com.tuya.smart.android.demo.Modelo.Operador;
+import com.tuya.smart.android.demo.Modelo.Pais;
+import com.tuya.smart.android.demo.Modelo.TipoUsuario;
 import com.tuya.smart.android.demo.camera.utils.FrescoManager;
 import com.tuya.smart.android.demo.login.activity.LoginActivity;
 import com.tuya.smart.android.network.IApiUrlProvider;
@@ -21,7 +26,7 @@ import com.tuya.smart.sdk.api.INeedLoginListener;
 public class TuyaSmartApp extends MultiDexApplication {
 
     private static final String TAG = "TuyaSmartApp";
-
+    private OpPersona op = new OpPersona(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
     @Override
     public void onCreate() {
         super.onCreate();
