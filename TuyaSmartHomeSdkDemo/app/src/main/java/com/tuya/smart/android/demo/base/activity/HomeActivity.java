@@ -91,12 +91,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         mIvMyDevice.setOnClickListener(mClickListener);
         mIvMyDevice.setColorFilter(mFuncBarTextSelectColor);
 
-        mTvHomeScene = findViewById(R.id.tv_home_my_scene);
-        mTvHomeScene.setOnClickListener(mClickListener);
-        mIvHomeScene = findViewById(R.id.iv_my_scene);
-        mIvHomeScene.setImageResource(R.drawable.my_scene);
-        mIvHomeScene.setOnClickListener(mClickListener);
-        mIvHomeScene.setColorFilter(mFuncBarTextNormalColor);
+        //mTvHomeScene = findViewById(R.id.tv_home_my_scene);
+        //mTvHomeScene.setOnClickListener(mClickListener);
+        //mIvHomeScene = findViewById(R.id.iv_my_scene);
+        //mIvHomeScene.setImageResource(R.drawable.my_scene);
+        //mIvHomeScene.setOnClickListener(mClickListener);
+        //mIvHomeScene.setColorFilter(mFuncBarTextNormalColor);
 
         mTvHomeCenter = (TextView) findViewById(R.id.tv_home_center);
         mTvHomeCenter.setOnClickListener(mClickListener);
@@ -114,9 +114,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                 mHomePresenter.showMyDevicePage();
             } else if (v.getId() == R.id.tv_home_center || v.getId() == R.id.iv_home_center) {
                 mHomePresenter.showPersonalCenterPage();
-            } else if (v.getId() == R.id.tv_home_my_scene || v.getId() == R.id.iv_my_scene) {
-                mHomePresenter.showScene();
-            }
+            } //else if (v.getId() == R.id.tv_home_my_scene || v.getId() == R.id.iv_my_scene) {
+                //mHomePresenter.showScene();
+            //}
         }
     };
 

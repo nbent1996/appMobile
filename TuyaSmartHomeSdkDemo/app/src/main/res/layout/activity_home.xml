@@ -50,6 +50,7 @@
                 android:textColor="?attr/list_secondary_color"
                 android:textSize="@dimen/ts_10"/>
         </RelativeLayout>
+        <!--
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -75,6 +76,7 @@
                 android:textColor="?attr/list_secondary_color"
                 android:textSize="@dimen/ts_10"/>
         </RelativeLayout>
+        -->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
