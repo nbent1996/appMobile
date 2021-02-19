@@ -176,7 +176,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
         /*nbent*/
         OpPersona op = new OpPersona(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
         try {
-            if(op.buscar(" WHERE Clientes.email='"+mUserName.getText()+"' AND Principales.servicioActivo='N'","Modelo.Principal").size()>0){
+            if(op.buscar(" WHERE Clientes.email='"+mUserName.getText()+"' AND Principales.servicioActivo='N' ","Modelo.Principal").size()>0){
                 Toast.makeText(LoginActivity.this,"Error de ingreso, póngase en contacto con su asesor.", Toast.LENGTH_SHORT).show();
                 finish();
             }
