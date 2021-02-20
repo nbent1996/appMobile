@@ -26,7 +26,7 @@
     <string name="binding">Binding&#046;&#046;</string>
     <string name="cancel_tip">OK</string>
     <string name="click_bind_phone">Tap bind phone number</string>
-    <string name="click_set_neekname">Toque para establecer su nombre</string>
+    <string name="click_set_neekname">Touch to set your name</string>
     <string name="contact_use_tip">You sign in with %s account</string>
     <string name="env_preview">(Preview)</string>
     <string name="env_wrong_tip">The device is online, while App is running under preview
@@ -154,7 +154,7 @@
     <string name="ty_mqtt_connecting">Device is connecting&#046;&#046;&#046;.</string>
     <string name="ty_net_useless_info">Network is unavailable</string>
     <string name="ty_no_net_info">Network error, please check</string>
-    <string name="ty_not_bind_phone_num">Not bind phone number yet\n Can\'t change password</string>
+    <string name="ty_not_bind_phone_num">Not bind phone number yet  Can\'t change password</string>
     <string name="ty_offline_delete_share">Delete sharing</string>
     <string name="ty_offline_subtitle">Please check or retry</string>
     <string name="ty_offline_title">The device is offline</string>
@@ -254,15 +254,11 @@
     <string name="connect_to_wifi">Connect Wi-Fi</string>
     <string name="connect_to_wifi_failure">Hotspot connection failed, please check password.
     </string>
-    <string name="connect_to_wifi_tip">Connect power, choose usable Wi-Fi network, and smart device
-        will use it to connect to the Internet.
-    </string>
+    <string name="connect_to_wifi_tip">"Connect power, choose usable Wi-Fi network, and smart device         will use it to connect to the Internet.     "</string>
     <string name="connectedto">Connected to</string>
     <string name="connecting">Connecting to</string>
     <string name="connectionError">An error occurred connecting to</string>
-    <string name="content_device_offline">Pleases check or try:\n1. if the device powered on\n2. if
-        Wi-Fi available\n3. Reset the device
-    </string>
+    <string name="content_device_offline">"Pleases check or try: 1. if the device powered on 2. if         Wi-Fi available 3. Reset the device     "</string>
     <string name="control_data_error">DP data error</string>
     <string name="control_data_error_code">11001</string>
     <string name="copy_right">©2015 Tuya Inc. All Rights Reserved</string>
@@ -314,9 +310,8 @@
     <string name="has_update"><![CDATA[<font color="#ff0000">New Version %s</font>]]></string>
     <string name="head_icon">Picture</string>
     <string name="home_add_device">Añadir dispositivo</string>
-    <string name="home_my_device">Dispositivos</string>
     <string name="home_scene">Smart</string>
-    <string name="home_personal_center">Perfil</string>
+    <string name="home_personal_center">Profile</string>
     <string name="input_new_user_phone_number">Enter new member\'s phone number</string>
     <string name="input_password">Password</string>
     <string name="input_telephone_number">Phone Number</string>
@@ -327,7 +322,7 @@
     <string name="login_China">China</string>
     <string name="login_USA">United States of America</string>
     <string name="login_choose_country">Country / Region</string>
-    <string name="login_get_code">Get</string>
+    <string name="login_get_code">get</string>
     <string name="login_now">Start</string>
     <string name="login_reget_code">Retry</string>
     <string name="login_session_expired">Session Token Expired, please log in again</string>
@@ -375,9 +370,7 @@
     <string name="rename">Rename</string>
     <string name="rename_device">Modify Device Name</string>
     <string name="repeat">Repeat</string>
-    <string name="reset_device_answer_1">Please reset device\n\n2.Power off device\n\n3.Power on
-        device after 15 seconds
-    </string>
+    <string name="reset_device_answer_1">"Please reset device  2.Power off device  3.Power on         device after 15 seconds     "</string>
     <string name="reset_device_question_1">No green light flashes</string>
     <string name="reset_device_question_2">Reset device</string>
     <string name="retry">Retry</string>
@@ -746,5 +739,6 @@
 
     <!-- AGREGADOS -->
     <string name="texto_panel_devices" translatable="false">Ver estado</string>
+    <string name="home_my_device">Devices</string>
 
 </resources>
