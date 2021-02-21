@@ -207,7 +207,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     }
 
     public void invocarWS(){
-        SoapPrimitive retorno;
+        //SoapPrimitive retorno;
         try {
         String email = mUserName.getText().toString();
         SoapObject request = new SoapObject(namespace, metodo);
@@ -216,7 +216,8 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
         sobre.setOutputSoapObject(request);
         HttpTransportSE tr = new HttpTransportSE(url);
         tr.call(accionSoap, sobre);
-        retorno = (SoapPrimitive)sobre.getResponse();
+        //retorno = (SoapPrimitive)sobre.getResponse();
+        SoapPrimitive retorno = (SoapPrimitive) sobre.getResponse();
         if(retorno.equals("false")){
             Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
             finish();
