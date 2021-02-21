@@ -5,28 +5,28 @@
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/mg_2" />
 
-            <solid android:color="#dc3023" />
+            <solid android:color="#455A64" />
         </shape>
     </item>
     <item android:state_selected="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/mg_2" />
 
-            <solid android:color="#dc3023" />
+            <solid android:color="#455A64" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/mg_2" />
 
-            <solid android:color="#dc3023" />
+            <solid android:color="#455A64" />
         </shape>
     </item>
     <item android:state_enabled="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/mg_2" />
 
-            <solid android:color="@color/orange" />
+            <solid android:color="#6F8E9D" />
         </shape>
     </item>
     <item android:state_enabled="false">

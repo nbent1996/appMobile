@@ -125,7 +125,7 @@
         android:layout_marginLeft="@dimen/mg_18"
         android:layout_marginRight="@dimen/mg_18"
         android:layout_marginTop="@dimen/mg_16">
-
+        <!--
         <TextView
             android:id="@+id/option_validate_code"
             android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
             android:text="@string/ty_login_sms_confirm"
             android:textColor="@color/text_gray2orange"
             android:textSize="@dimen/ts_14"/>
-
+        -->
         <TextView
             android:id="@+id/option_forget_password"
             android:layout_width="wrap_content"
@@ -145,6 +145,7 @@
             android:textSize="@dimen/ts_14"/>
 
     </RelativeLayout>
+    <!--
     <Button
         android:id="@+id/bnt_qrcode_login"
         android:layout_below="@+id/login_sms"
@@ -154,5 +155,5 @@
         style="@style/Button.Normal"
         android:layout_marginBottom="10dp"
         android:text="@string/login_qrcode"/>
-
+    -->
 </RelativeLayout>

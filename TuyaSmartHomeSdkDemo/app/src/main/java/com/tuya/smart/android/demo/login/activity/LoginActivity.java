@@ -53,8 +53,8 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     @BindView(R.id.login_submit)
     public Button mLoginSubmit;
 
-    @BindView(R.id.bnt_qrcode_login)
-    public Button mQRLogin;
+    //@BindView(R.id.bnt_qrcode_login)
+    //public Button mQRLogin;
     @BindView(R.id.country_name)
     public TextView mCountryName;
 
@@ -144,7 +144,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
         }
     }
 
-    @OnClick(R.id.option_validate_code)
+    //@OnClick(R.id.option_validate_code)
     public void loginWithPhoneCode() {
         startActivity(new Intent(LoginActivity.this, LoginWithPhoneActivity.class));
     }
@@ -233,7 +233,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
         }
 
     }
-    @OnClick(R.id.bnt_qrcode_login)
+    //@OnClick(R.id.bnt_qrcode_login)
     public void qrCodeLogin(){
         Intent intent = new Intent(this, QRCodeLoginActivity.class);
         startActivity(intent);
