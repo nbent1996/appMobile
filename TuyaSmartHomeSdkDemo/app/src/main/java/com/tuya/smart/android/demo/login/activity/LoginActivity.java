@@ -49,7 +49,8 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     private static String metodo = "validarAcceso";
     private static String namespace = "http://alfacomsrl.dyndns.org:8080/dashboard/";
     private static String accionSoap = "http://alfacomsrl.dyndns.org:8080/dashboard/validarAcceso";
-    private static String url = "http://3.85.59.32:8080//dashboard/IntegracionWebService?wsdl";
+    private static String url = "http://alfacomsrl.dyndns.org:8080/dashboard/IntegracionWebService?wsdl";
+    private static String usernameElegido = "";
     @BindView(R.id.login_submit)
     public Button mLoginSubmit;
 
@@ -182,8 +183,18 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     @OnClick(R.id.login_submit)
     public void onClickLogin() {
         // 登录
-        consumir();
+        /*nbent*/
+        LoginActivity.usernameElegido = mUserName.getText().toString();
+        //consumir();
+        if (LoginActivity.usernameElegido.equals("nicolasbentancor1996@gmail.com")) {
+            Toast.makeText(getApplicationContext(), "Error de acceso, comunicate con tu operador.", Toast.LENGTH_LONG).show();
+            finish();
+        }else{
+
+        /*nbent*/
+
         if (mLoginSubmit.isEnabled()) {
+
             String userName = mUserName.getText().toString();
             if (!ValidatorUtil.isEmail(userName) && mCountryName.getText().toString().contains("+86") && mUserName.getText().length() != 11) {
                 ToastUtil.shortToast(LoginActivity.this, getString(R.string.ty_phone_num_error));
@@ -193,6 +204,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
             disableLogin();
             ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
             mLoginPresenter.login(userName, mPassword.getText().toString());
+        }
         }
     }
     private class consumirAsync extends AsyncTask<Void, Void, Void> {
@@ -207,22 +219,23 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     }
 
     public void invocarWS(){
-        //SoapPrimitive retorno;
         try {
-        String email = mUserName.getText().toString();
-        SoapObject request = new SoapObject(namespace, metodo);
-        request.addProperty("email", email);
-        SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope. VER11);
-        sobre.setOutputSoapObject(request);
-        HttpTransportSE tr = new HttpTransportSE(url);
-        tr.call(accionSoap, sobre);
-        //retorno = (SoapPrimitive)sobre.getResponse();
-        SoapPrimitive retorno = (SoapPrimitive) sobre.getResponse();
-        if(retorno.equals("false")){
-            Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
-            finish();
+            String email = LoginActivity.usernameElegido;
+            SoapObject request = new SoapObject(namespace, metodo);
+            request.addProperty("email", email);
+            SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            sobre.setOutputSoapObject(request);
+            HttpTransportSE tr = new HttpTransportSE(url);
+            tr.call(accionSoap, sobre);
+            SoapPrimitive retorno = (SoapPrimitive) sobre.getResponse();
+            if (retorno.equals("false")) {
+                Toast.makeText(getApplicationContext(), "Error de acceso, comunicate con tu operador.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
-        } catch (SoapFault soapFault) {
+        /*} catch (SoapFault soapFault) {
             soapFault.printStackTrace();
         } catch (XmlPullParserException xmlPullParserException) {
             xmlPullParserException.printStackTrace();
@@ -230,7 +243,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
             socketTimeoutException.printStackTrace();
         } catch (IOException ioException) {
             ioException.printStackTrace();
-        }
+        }*/
 
     }
     //@OnClick(R.id.bnt_qrcode_login)
