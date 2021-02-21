@@ -3,6 +3,7 @@ package com.tuya.smart.android.demo.login.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
@@ -16,13 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.tuya.smart.android.common.utils.ValidatorUtil;
-import com.tuya.smart.android.demo.Datos.OpPersona;
-import com.tuya.smart.android.demo.Modelo.Empresa;
-import com.tuya.smart.android.demo.Modelo.Operador;
-import com.tuya.smart.android.demo.Modelo.Pais;
-import com.tuya.smart.android.demo.Modelo.TipoUsuario;
 import com.tuya.smart.android.demo.R;
 import com.tuya.smart.android.demo.base.activity.BaseActivity;
 import com.tuya.smart.android.demo.login.presenter.LoginPresenter;
@@ -30,6 +25,17 @@ import com.tuya.smart.android.demo.base.utils.ProgressUtil;
 import com.tuya.smart.android.demo.base.utils.ToastUtil;
 import com.tuya.smart.android.demo.login.ILoginView;
 import com.tuya.smart.android.mvp.bean.Result;
+
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.SoapFault;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +46,10 @@ import butterknife.Unbinder;
  * Created by letian on 16/7/15.
  */
 public class LoginActivity extends BaseActivity implements ILoginView, TextWatcher {
-
+    private static String metodo = "validarAcceso";
+    private static String namespace = "http://alfacomsrl.dyndns.org:8080/dashboard/";
+    private static String accionSoap = "http://alfacomsrl.dyndns.org:8080/dashboard/validarAcceso";
+    private static String url = "http://3.85.59.32:8080//dashboard/IntegracionWebService?wsdl";
     @BindView(R.id.login_submit)
     public Button mLoginSubmit;
 
@@ -173,18 +182,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     @OnClick(R.id.login_submit)
     public void onClickLogin() {
         // 登录
-        /*nbent*/
-        OpPersona op = new OpPersona(new Operador("bentancor", "Nicolás Bentancor", new Empresa("526283747346"),new Pais("URU"),new TipoUsuario("administrador"), "Masculino"));
-        try {
-            if(op.buscar(" WHERE Clientes.email='"+mUserName.getText()+"' AND Principales.servicioActivo='N' ","Modelo.Principal").size()>0){
-                Toast.makeText(LoginActivity.this,"Error de ingreso, póngase en contacto con su asesor.", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        /*nbent*/
+        consumir();
         if (mLoginSubmit.isEnabled()) {
             String userName = mUserName.getText().toString();
             if (!ValidatorUtil.isEmail(userName) && mCountryName.getText().toString().contains("+86") && mUserName.getText().length() != 11) {
@@ -196,6 +194,43 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
             ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
             mLoginPresenter.login(userName, mPassword.getText().toString());
         }
+    }
+    private class consumirAsync extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            invocarWS();
+            return null;
+        }
+    }
+    public void consumir(){
+        new consumirAsync().execute();
+    }
+
+    public void invocarWS(){
+        SoapPrimitive retorno;
+        try {
+        String email = mUserName.getText().toString();
+        SoapObject request = new SoapObject(namespace, metodo);
+        request.addProperty("email", email);
+        SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope. VER11);
+        sobre.setOutputSoapObject(request);
+        HttpTransportSE tr = new HttpTransportSE(url);
+        tr.call(accionSoap, sobre);
+        retorno = (SoapPrimitive)sobre.getResponse();
+        if(retorno.equals("false")){
+            Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+            finish();
+        }
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+        } catch (XmlPullParserException xmlPullParserException) {
+            xmlPullParserException.printStackTrace();
+        } catch (SocketTimeoutException socketTimeoutException) {
+            socketTimeoutException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
     }
     @OnClick(R.id.bnt_qrcode_login)
     public void qrCodeLogin(){
