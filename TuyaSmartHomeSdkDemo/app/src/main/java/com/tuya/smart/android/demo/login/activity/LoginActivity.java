@@ -25,6 +25,7 @@ import com.tuya.smart.android.demo.base.utils.ProgressUtil;
 import com.tuya.smart.android.demo.base.utils.ToastUtil;
 import com.tuya.smart.android.demo.login.ILoginView;
 import com.tuya.smart.android.mvp.bean.Result;
+import com.tuya.smart.home.sdk.TuyaHomeSdk;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
@@ -47,10 +48,13 @@ import butterknife.Unbinder;
  */
 public class LoginActivity extends BaseActivity implements ILoginView, TextWatcher {
     private static String metodo = "validarAcceso";
-    private static String namespace = "http://alfacomsrl.dyndns.org:8080/dashboard/";
-    private static String accionSoap = "http://alfacomsrl.dyndns.org:8080/dashboard/validarAcceso";
-    private static String url = "http://alfacomsrl.dyndns.org:8080/dashboard/IntegracionWebService?wsdl";
+    private static String namespace = "http://WebServices/";
+    private static String accionSoap = "http://WebServices/validarAcceso";
+    private static String url = "http://alfacomsrl.dyndns.org:8080/dashboard/IntegracionWebService?wsdl/";
     private static String usernameElegido = "";
+    private static boolean esMoroso = false;
+    private static boolean tareaFinalizada = false;
+    private static consumirAsync hiloWS = null;
     @BindView(R.id.login_submit)
     public Button mLoginSubmit;
 
@@ -185,12 +189,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
         // 登录
         /*nbent*/
         LoginActivity.usernameElegido = mUserName.getText().toString();
-        //consumir();
-        if (LoginActivity.usernameElegido.equals("nicolasbentancor1996@gmail.com")) {
-            Toast.makeText(getApplicationContext(), "Error de acceso, comunicate con tu operador.", Toast.LENGTH_LONG).show();
-            finish();
-        }else{
-
+        consumir();
         /*nbent*/
 
         if (mLoginSubmit.isEnabled()) {
@@ -205,21 +204,35 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
             ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
             mLoginPresenter.login(userName, mPassword.getText().toString());
         }
+        boolean continuar = true;
+        while(continuar && !LoginActivity.tareaFinalizada){
+        if(esMoroso && !LoginActivity.tareaFinalizada){
+            continuar = false;
+            Toast.makeText(getApplicationContext(), "Error de acceso, comunicate con tu operador.", Toast.LENGTH_LONG).show();
+            this.onDestroy();
+            finish();
+
         }
+        }
+        esMoroso = false;
+        LoginActivity.tareaFinalizada = false;
     }
     private class consumirAsync extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
             invocarWS();
+            this.cancel(true);
             return null;
         }
     }
     public void consumir(){
-        new consumirAsync().execute();
+        LoginActivity.hiloWS = new consumirAsync();
+        LoginActivity.hiloWS.execute();
     }
 
     public void invocarWS(){
         try {
+            //ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
             String email = LoginActivity.usernameElegido;
             SoapObject request = new SoapObject(namespace, metodo);
             request.addProperty("email", email);
@@ -228,14 +241,14 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
             HttpTransportSE tr = new HttpTransportSE(url);
             tr.call(accionSoap, sobre);
             SoapPrimitive retorno = (SoapPrimitive) sobre.getResponse();
-            if (retorno.equals("false")) {
-                Toast.makeText(getApplicationContext(), "Error de acceso, comunicate con tu operador.", Toast.LENGTH_LONG).show();
-                finish();
+            if (retorno.toString().equals("false")) {
+                LoginActivity.esMoroso = true;
             }
-        }catch(Exception ex){
+            LoginActivity.tareaFinalizada=true;
+        /*}catch(Exception ex){
             ex.printStackTrace();
-        }
-        /*} catch (SoapFault soapFault) {
+        }*/
+        } catch (SoapFault soapFault) {
             soapFault.printStackTrace();
         } catch (XmlPullParserException xmlPullParserException) {
             xmlPullParserException.printStackTrace();
@@ -243,7 +256,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
             socketTimeoutException.printStackTrace();
         } catch (IOException ioException) {
             ioException.printStackTrace();
-        }*/
+        }
 
     }
     //@OnClick(R.id.bnt_qrcode_login)
