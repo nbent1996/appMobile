@@ -601,8 +601,7 @@
     <string name="get_share_list">Get Share List</string>
     <string name="add_uid_share">Add Uid Share</string>
     <string name="ty_logout_loading">Exiting, please wait&#046;&#046;&#046;</string>
-    <string name="ty_add_device_ap_info">Power on and confirm instructor light slowly flashing
-    </string>
+    <string name="ty_add_device_ap_info">"Power on and confirm instructor light slowly flashing     "</string>
     <string name="ty_add_device_btn_info">Instructor light is on other status</string>
     <string name="ty_add_device_ez_btn_info">Instructor light is quickly flashing</string>
     <string name="ty_add_device_ez_failure_ap_tip">Unstable network, please confirm instructor light
