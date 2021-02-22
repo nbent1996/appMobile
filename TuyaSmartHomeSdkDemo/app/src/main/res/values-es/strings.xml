@@ -12,7 +12,7 @@
     <string name="family_add_finish">finalizar</string>
     <string name="family_add_title">Agregar Familia</string>
     <string name="family_index_title">Administrar familia</string>
-    <string name="family_empty_btn_text">agregar familia</string>
+    <string name="family_empty_btn_text">Agregar familia</string>
     <string name="operation_failure">Fallo de operación</string>
     <string name="device_name">nombre dispositivo</string>
     <string name="get_device_status">obtener estado</string>
@@ -46,7 +46,7 @@
     <string name="ty_login_sms_confirm">Iniciar sesión con verificación por SMS</string>
     <string name="ty_login_sms">verificar SMS e iniciar sesión</string>
     <string name="ty_login_register">Registrarse</string>
-    <string name="ty_login_modify_password">" Cambiar la contraseña"</string>
+    <string name="ty_login_modify_password">Cambiar la contraseña</string>
     <string name="ty_login_forget_keyword">Olvidé la constraseña</string>
     <string name="phone_email">Número celular/E-mail</string>
     <string name="modify_password_success">Contraseña cambiada Iniciar sesión nuevamente</string>
@@ -321,4 +321,8 @@
     <string name="ty_logout_loading">Cerrando sesión, por favor espere&#046;&#046;&#046;</string>
     <string name="add_demo_device">Agregar dispositivo de prueba</string>
     <string name="error_logueo">Error al acceder, comunicate con tu operador.</string>
+    <string name="ty_add_device_wifi">Dispositivo WIFI</string>
+    <string name="ty_add_device_gateway">Dispositivo Ethernet</string>
+    <string name="ty_add_device_grcode">Configuración QRCode</string>
+    <string name="ty_ez_connecting_device_note2">Mantén el router, teléfono y dispositivo en una distancia válida</string>
 </resources>
