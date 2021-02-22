@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.tuya.smart.android.common.utils.ValidatorUtil;
 import com.tuya.smart.android.demo.R;
 import com.tuya.smart.android.demo.base.activity.BaseActivity;
+import com.tuya.smart.android.demo.base.activity.PersonalInfoActivity;
+import com.tuya.smart.android.demo.base.utils.LoginHelper;
 import com.tuya.smart.android.demo.login.presenter.LoginPresenter;
 import com.tuya.smart.android.demo.base.utils.ProgressUtil;
 import com.tuya.smart.android.demo.base.utils.ToastUtil;
@@ -52,8 +54,8 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
     private static String accionSoap = "http://WebServices/validarAcceso";
     private static String url = "http://alfacomsrl.dyndns.org:8080/dashboard/IntegracionWebService?wsdl/";
     private static String usernameElegido = "";
-    private static boolean esMoroso = false;
-    private static boolean tareaFinalizada = false;
+    //private static boolean esMoroso = false;
+    //private static boolean tareaFinalizada = false;
     private static consumirAsync hiloWS = null;
     @BindView(R.id.login_submit)
     public Button mLoginSubmit;
@@ -189,7 +191,9 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
         // 登录
         /*nbent*/
         LoginActivity.usernameElegido = mUserName.getText().toString();
-        consumir();
+        //consumir();
+        LoginActivity.hiloWS = new consumirAsync();
+        LoginActivity.hiloWS.execute();
         /*nbent*/
 
         if (mLoginSubmit.isEnabled()) {
@@ -201,10 +205,10 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
             }
             hideIMM();
             disableLogin();
-            ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
-            mLoginPresenter.login(userName, mPassword.getText().toString());
+            //ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
+            //mLoginPresenter.login(userName, mPassword.getText().toString());
         }
-        boolean continuar = true;
+        /*boolean continuar = true;
         while(continuar && !LoginActivity.tareaFinalizada){
         if(esMoroso && !LoginActivity.tareaFinalizada){
             continuar = false;
@@ -216,49 +220,111 @@ public class LoginActivity extends BaseActivity implements ILoginView, TextWatch
         }
         esMoroso = false;
         LoginActivity.tareaFinalizada = false;
-    }
-    private class consumirAsync extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            invocarWS();
-            this.cancel(true);
-            return null;
-        }
-    }
-    public void consumir(){
-        LoginActivity.hiloWS = new consumirAsync();
-        LoginActivity.hiloWS.execute();
-    }
 
-    public void invocarWS(){
-        try {
-            //ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
+         */
+    }
+    private class consumirAsync extends AsyncTask<String,Integer,Boolean> {
+
+        protected Boolean doInBackground(String... params) {
+            boolean resul = true;
+
             String email = LoginActivity.usernameElegido;
             SoapObject request = new SoapObject(namespace, metodo);
             request.addProperty("email", email);
             SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             sobre.setOutputSoapObject(request);
             HttpTransportSE tr = new HttpTransportSE(url);
-            tr.call(accionSoap, sobre);
-            SoapPrimitive retorno = (SoapPrimitive) sobre.getResponse();
-            if (retorno.toString().equals("false")) {
-                LoginActivity.esMoroso = true;
+
+            try {
+
+                tr.call(accionSoap, sobre);
+                SoapPrimitive retorno = (SoapPrimitive) sobre.getResponse();
+                //LoginActivity.tareaFinalizada=true;
+                    if (retorno.toString().equals("false")) {
+                        //LoginActivity.esMoroso = true;
+                        resul = false;
+                        return resul;
+                    }
+
+            } catch (SoapFault soapFault) {
+                soapFault.printStackTrace();
+                resul = false;
+            } catch (XmlPullParserException xmlPullParserException) {
+                xmlPullParserException.printStackTrace();
+                resul = false;
+            } catch (SocketTimeoutException socketTimeoutException) {
+                socketTimeoutException.printStackTrace();
+                resul = false;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                resul = false;
             }
-            LoginActivity.tareaFinalizada=true;
-        /*}catch(Exception ex){
-            ex.printStackTrace();
-        }*/
-        } catch (SoapFault soapFault) {
-            soapFault.printStackTrace();
-        } catch (XmlPullParserException xmlPullParserException) {
-            xmlPullParserException.printStackTrace();
-        } catch (SocketTimeoutException socketTimeoutException) {
-            socketTimeoutException.printStackTrace();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+
+            //invocarWS();
+            //this.cancel(true);
+            //return null;
+            return resul;
+        }
+
+        protected void onPostExecute(Boolean result){
+            if(!result){
+                try {
+                    this.finalize();
+                    finish();
+                    LoginActivity.this.finalize();
+                    onDestroy();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+            ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
+            mLoginPresenter.login(usernameElegido, mPassword.getText().toString());
         }
 
     }
+
+
+
+    //public void consumir(){
+    //    LoginActivity.hiloWS = new consumirAsync();
+    //    LoginActivity.hiloWS.execute();
+    //}
+
+    //public void invocarWS(){
+        //try {
+            //ProgressUtil.showLoading(LoginActivity.this, R.string.logining);
+            //String email = LoginActivity.usernameElegido;
+            //SoapObject request = new SoapObject(namespace, metodo);
+            //request.addProperty("email", email);
+            //SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            //sobre.setOutputSoapObject(request);
+            //HttpTransportSE tr = new HttpTransportSE(url);
+            //tr.call(accionSoap, sobre);
+            //SoapPrimitive retorno = (SoapPrimitive) sobre.getResponse();
+                //if (retorno.toString().equals("false")) {
+                //        LoginActivity.esMoroso = true;
+                //}
+
+            //LoginActivity.tareaFinalizada=true;
+
+        /*}catch(Exception ex){
+
+            ex.printStackTrace();
+        }*/
+        //catch (SoapFault soapFault) {
+            //soapFault.printStackTrace();
+        //} catch (XmlPullParserException xmlPullParserException) {
+            //xmlPullParserException.printStackTrace();
+        //} catch (SocketTimeoutException socketTimeoutException) {
+            //socketTimeoutException.printStackTrace();
+        //} catch (IOException ioException) {
+        //ioException.printStackTrace();
+        //}
+
+
+        //}
+
+    //}
     //@OnClick(R.id.bnt_qrcode_login)
     public void qrCodeLogin(){
         Intent intent = new Intent(this, QRCodeLoginActivity.class);

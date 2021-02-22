@@ -320,4 +320,5 @@
     <string name="content_device_offline">Por favor, verifique o pruebe: 1. si el dispositivo está encendido;  2. si hay Wi-Fi disponible;  3. Reinicie el dispositivo</string>
     <string name="ty_logout_loading">Cerrando sesión, por favor espere&#046;&#046;&#046;</string>
     <string name="add_demo_device">Agregar dispositivo de prueba</string>
+    <string name="error_logueo">Error al acceder, comunicate con tu operador.</string>
 </resources>

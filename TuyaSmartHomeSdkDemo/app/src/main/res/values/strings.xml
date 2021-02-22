@@ -740,5 +740,6 @@
     <!-- AGREGADOS -->
     <string name="texto_panel_devices" translatable="false">Ver estado</string>
     <string name="home_my_device">Devices</string>
+    <string name="error_logueo">Access error, contact your operator.</string>
 
 </resources>
