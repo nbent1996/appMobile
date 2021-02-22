@@ -11,8 +11,8 @@ import butterknife.BindView;
 
 public class FamilyIndexItem extends BaseItem<HomeBean> {
 
-    @BindView(R.id.recycler_family_item_name)
-    TextView nameTv;
+    //@BindView(R.id.recycler_family_item_name)
+    //TextView nameTv;
 
 
     public FamilyIndexItem(HomeBean data) {
@@ -31,11 +31,11 @@ public class FamilyIndexItem extends BaseItem<HomeBean> {
 
     @Override
     public void onReleaseViews(BaseViewHolder holder, int sectionKey, int sectionViewPosition) {
-        nameTv.setText("");
+        //nameTv.setText("");
     }
 
     @Override
     public void onSetViewsData(BaseViewHolder holder, int sectionKey, int sectionViewPosition) {
-        nameTv.setText(getData().getName());
+        //nameTv.setText(getData().getName());
     }
 }

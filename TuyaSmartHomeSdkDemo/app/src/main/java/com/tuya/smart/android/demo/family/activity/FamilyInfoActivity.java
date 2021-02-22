@@ -30,8 +30,8 @@ import butterknife.Unbinder;
 
 public class FamilyInfoActivity extends BaseActivity implements IFamilyInfoView {
 
-    @BindView(R.id.family_info_rv)
-    RecyclerView rv;
+    //@BindView(R.id.family_info_rv)
+    //RecyclerView rv;
 
     public static final String KEY_HOME_ID = "home_id";
 
@@ -50,38 +50,38 @@ public class FamilyInfoActivity extends BaseActivity implements IFamilyInfoView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family_info);
+        //setContentView(R.layout.activity_family_info);
         unbinder = ButterKnife.bind(this);
         mHomeId = getIntent().getLongExtra(KEY_HOME_ID, -1);
 
-        initToolbar();
-        initTitle();
+        //initToolbar();
+        //initTitle();
         initAdapter();
-        initPresenter();
+        //initPresenter();
     }
 
 
     private void initAdapter() {
         mAdapter = new BaseRVAdapter<>();
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(mAdapter);
+        //rv.setLayoutManager(new LinearLayoutManager(this));
+        //rv.setAdapter(mAdapter);
     }
 
-    private void initTitle() {
-        setDisplayHomeAsUpEnabled();
-        setTitle(getString(R.string.family_info_title));
-        mToolBar.setTitleTextColor(Color.WHITE);
-    }
+    //private void initTitle() {
+    //    setDisplayHomeAsUpEnabled();
+    //    setTitle(getString(R.string.family_info_title));
+    //    mToolBar.setTitleTextColor(Color.WHITE);
+    //}
 
-    private void initPresenter() {
-        mPresenter = new FamilyInfoPresenter(this);
-    }
+    //private void initPresenter() {
+    //    mPresenter = new FamilyInfoPresenter(this);
+    //}
 
 
-    @OnClick(R.id.family_info_remove)
-    public void onRemoveHomeClick() {
-        mPresenter.removeHome();
-    }
+    //@OnClick(R.id.family_info_remove)
+    //public void onRemoveHomeClick() {
+    //    mPresenter.removeHome();
+    //}
 
     @Override
     public Context getContext() {
@@ -149,6 +149,6 @@ public class FamilyInfoActivity extends BaseActivity implements IFamilyInfoView 
         if (null != unbinder) {
             unbinder.unbind();
         }
-        mPresenter.onDestroy();
+        //mPresenter.onDestroy();
     }
 }
